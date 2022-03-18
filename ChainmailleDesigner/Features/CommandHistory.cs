@@ -15,5 +15,52 @@ namespace ChainmailleDesigner.Features
     /// </summary>
     public static class CommandHistory
     {
+        private static QueueStack<IAction> queueStackNormal { get; set; }
+        private static QueueStack<IAction> queueStackReverse { get; set; }
+
+        static CommandHistory()
+        {
+            queueStackNormal = new QueueStack<IAction>();
+            queueStackReverse = new QueueStack<IAction>();
+        }
+
+        public static void Executed(IAction newAction)
+        {
+            queueStackNormal.Push(newAction);
+            ClearReverse();
+        }
+
+        public static void Undo()
+        {
+            var UndoAction = queueStackNormal.Pop();
+            if (UndoAction != null)
+            {
+                UndoAction.Undo();
+                queueStackReverse.Push(UndoAction);
+            }
+        }
+
+        public static void Redo()
+        {
+            var RedoAction = queueStackNormal.Pop();
+            if (RedoAction != null)
+            {
+                RedoAction.Redo();
+                queueStackNormal.Push(RedoAction);
+            }
+        }
+
+        public static void ClearNormal()
+        {
+            queueStackNormal.Clear();
+        }
+
+        public static void ClearReverse()
+        {
+            if (queueStackNormal.HasItems)
+            {
+                queueStackReverse.Clear();
+            }
+        }
     }
 }

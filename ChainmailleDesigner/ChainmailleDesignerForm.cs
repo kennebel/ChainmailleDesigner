@@ -2440,5 +2440,15 @@ namespace ChainmailleDesigner
         ShowRenderedImageAtZoom();
       }
     }
-  }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChainmailleDesigner.Features.CommandHistory.Undo();
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChainmailleDesigner.Features.CommandHistory.Redo();
+        }
+    }
 }

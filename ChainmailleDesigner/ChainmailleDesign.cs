@@ -25,6 +25,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 using System.Xml;
+using ChainmailleDesigner.Features;
+using ChainmailleDesigner.Features.CommandHistorySupport;
 
 using LabColor = System.Tuple<double, double, double>;
 
@@ -4125,11 +4127,18 @@ namespace ChainmailleDesigner
     }
 
     public void SetElementColor(ChainmaillePatternElementId elementId,
-      Color color, ChainmaillePatternElement referencedElement)
+      Color color, ChainmaillePatternElement referencedElement, bool calledFromCommandHistory=false)
     {
       Point? cPoint = ElementToPointInColorImage(elementId, referencedElement);
       if (cPoint.HasValue)
       {
+        if (!calledFromCommandHistory)
+        {
+          var OldColor = colorImage.BitmapImage.GetPixel(cPoint.Value.X, cPoint.Value.Y);
+          var SaveAction = new ActionRingColorChange(this, elementId, color, referencedElement, OldColor);
+          CommandHistory.Executed(SaveAction);
+        }
+
         colorImage.BitmapImage.SetPixel(cPoint.Value.X, cPoint.Value.Y, color);
         hasBeenChanged = true;
       }

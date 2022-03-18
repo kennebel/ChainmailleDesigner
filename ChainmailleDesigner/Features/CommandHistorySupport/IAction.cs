@@ -4,11 +4,8 @@ namespace ChainmailleDesigner.Features.CommandHistorySupport
 {
     public interface IAction
     {
+        void Undo();
 
-        void execute();
-
-        void undo();
-
-        string getName();
+        void Redo();
     }
 }

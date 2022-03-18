@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChainmailleDesigner.Features.CommandHistorySupport
 {
     public class QueueStack<T>
     {
-        #region Attributes
+        #region Fields
         private LinkedList<T> dataCollection { get; set; }
+        public bool HasItems {  get {  return dataCollection.Count > 0; } }
         #endregion
 
-        #region COnstruct / Destruct
+        #region Construct / Destruct
         public QueueStack()
         {
             dataCollection = new LinkedList<T>();
@@ -27,16 +26,8 @@ namespace ChainmailleDesigner.Features.CommandHistorySupport
 
         public T Pop()
         {
-            if (dataCollection.Count() > 0)
-            {
-                var Top = dataCollection.First();
-                dataCollection.RemoveFirst();
-                return Top;
-            }
-            else
-            {
-                return default;
-            }
+            var Top = dataCollection.FirstOrDefault();
+            return Top;
         }
 
         public void Clear()
