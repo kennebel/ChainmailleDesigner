@@ -27,6 +27,7 @@ namespace ChainmailleDesigner.Features.CommandHistorySupport
         public T Pop()
         {
             var Top = dataCollection.FirstOrDefault();
+            if (dataCollection.Count > 0) { dataCollection.RemoveFirst(); }
             return Top;
         }
 

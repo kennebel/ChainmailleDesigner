@@ -42,7 +42,7 @@ namespace ChainmailleDesigner.Features
 
         public static void Redo()
         {
-            var RedoAction = queueStackNormal.Pop();
+            var RedoAction = queueStackReverse.Pop();
             if (RedoAction != null)
             {
                 RedoAction.Redo();

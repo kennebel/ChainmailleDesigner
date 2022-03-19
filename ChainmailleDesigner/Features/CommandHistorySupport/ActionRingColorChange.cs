@@ -36,11 +36,13 @@ namespace ChainmailleDesigner.Features.CommandHistorySupport
         public void Undo()
         {
             CD.SetElementColor(ElementId, OldRingColor, ReferencedElement, true);
+            CD.RenderPatternElement(ElementId, ReferencedElement);
         }
 
         public void Redo()
         {
             CD.SetElementColor(ElementId, RingColor, ReferencedElement, true);
+            CD.RenderPatternElement(ElementId, ReferencedElement);
         }
         #endregion
     }

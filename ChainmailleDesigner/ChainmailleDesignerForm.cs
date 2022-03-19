@@ -2444,11 +2444,13 @@ namespace ChainmailleDesigner
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChainmailleDesigner.Features.CommandHistory.Undo();
+            ShowRenderedImageAtZoom();
         }
 
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChainmailleDesigner.Features.CommandHistory.Redo();
+            ShowRenderedImageAtZoom();
         }
     }
 }
