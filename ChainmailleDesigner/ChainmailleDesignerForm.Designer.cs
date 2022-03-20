@@ -66,6 +66,9 @@ namespace ChainmailleDesigner
             this.printRenderedImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.designToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guidelinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,9 +105,6 @@ namespace ChainmailleDesigner
             this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.licenseAgreementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renderedImagePictureBox = new System.Windows.Forms.PictureBox();
             this.renderedImagePanel = new System.Windows.Forms.Panel();
             this.zoomedImageVerticalScrollBar = new System.Windows.Forms.VScrollBar();
@@ -261,6 +261,31 @@ namespace ChainmailleDesigner
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.undoToolStripMenuItem,
+            this.redoToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // undoToolStripMenuItem
+            // 
+            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
+            this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.undoToolStripMenuItem.Text = "Undo";
+            this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
+            // 
+            // redoToolStripMenuItem
+            // 
+            this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
+            this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.redoToolStripMenuItem.Text = "Redo";
+            this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
+            // 
             // designToolStripMenuItem
             // 
             this.designToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -275,7 +300,7 @@ namespace ChainmailleDesigner
             // infoToolStripMenuItem
             // 
             this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
-            this.infoToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.infoToolStripMenuItem.Text = "Info...";
             this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
             // 
@@ -293,7 +318,7 @@ namespace ChainmailleDesigner
             this.toolStripMenuItem6,
             this.clearAllGuidelinesToolStripMenuItem});
             this.guidelinesToolStripMenuItem.Name = "guidelinesToolStripMenuItem";
-            this.guidelinesToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.guidelinesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.guidelinesToolStripMenuItem.Text = "Guidelines";
             // 
             // showHideGuidelinesToolStripMenuItem
@@ -368,7 +393,7 @@ namespace ChainmailleDesigner
             this.showHideOverlayToolStripMenuItem,
             this.rotateToolStripMenuItem1});
             this.designOverlayToolStripMenuItem.Name = "designOverlayToolStripMenuItem";
-            this.designOverlayToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.designOverlayToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.designOverlayToolStripMenuItem.Text = "Overlay";
             // 
             // openOverlayToolStripMenuItem
@@ -420,7 +445,7 @@ namespace ChainmailleDesigner
             this.clockwiseToolStripMenuItem,
             this.counterclockwiseToolStripMenuItem});
             this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
-            this.rotateToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.rotateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.rotateToolStripMenuItem.Text = "Rotate";
             // 
             // clockwiseToolStripMenuItem
@@ -493,7 +518,7 @@ namespace ChainmailleDesigner
             // paletteWindowToolStripMenuItem
             // 
             this.paletteWindowToolStripMenuItem.Name = "paletteWindowToolStripMenuItem";
-            this.paletteWindowToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.paletteWindowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.paletteWindowToolStripMenuItem.Text = "Palette";
             this.paletteWindowToolStripMenuItem.Click += new System.EventHandler(this.paletteWindowToolStripMenuItem_Click);
             // 
@@ -535,31 +560,6 @@ namespace ChainmailleDesigner
             this.licenseAgreementToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.licenseAgreementToolStripMenuItem.Text = "License Agreement...";
             this.licenseAgreementToolStripMenuItem.Click += new System.EventHandler(this.licenseAgreementToolStripMenuItem_Click);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.undoToolStripMenuItem,
-            this.redoToolStripMenuItem});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 22);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // undoToolStripMenuItem
-            // 
-            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.undoToolStripMenuItem.Text = "Undo";
-            this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
-            // 
-            // redoToolStripMenuItem
-            // 
-            this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.redoToolStripMenuItem.Text = "Redo";
-            this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
             // renderedImagePictureBox
             // 

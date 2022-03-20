@@ -13,54 +13,95 @@ namespace ChainmailleDesigner.Features
     /// 
     /// Undo/Redo system for Chainmaille Designer
     /// </summary>
-    public static class CommandHistory
+    public class CommandHistory
     {
-        private static QueueStack<IAction> queueStackNormal { get; set; }
-        private static QueueStack<IAction> queueStackReverse { get; set; }
+        #region Event Handling
+        public delegate void HistoryChangedEventHandler(object source, EventArgs args);
+        public event HistoryChangedEventHandler HistoryChanged;
 
+        public class HistoryStatus : EventArgs
+        {
+            public bool HasUndoAvailable { get; set; }
+            public bool HasRedoAvailable { get; set; }
+        }
+        #endregion
+
+        #region Fields
+        public static CommandHistory instance { get; private set; }
+
+        private QueueStack<IAction> queueStackNormal { get; set; }
+        private QueueStack<IAction> queueStackReverse { get; set; }
+
+        public static bool HasUndoAvailable { get { return instance.queueStackNormal.HasItems; } }
+        public static bool HasRedoAvailable { get { return instance.queueStackReverse.HasItems; } }
+        #endregion
+
+        #region Construct / Destruct
         static CommandHistory()
+        {
+            instance = new CommandHistory();
+        }
+
+        private CommandHistory()
         {
             queueStackNormal = new QueueStack<IAction>();
             queueStackReverse = new QueueStack<IAction>();
         }
+        #endregion
 
+        #region Methods
         public static void Executed(IAction newAction)
         {
-            queueStackNormal.Push(newAction);
-            ClearReverse();
+            instance.queueStackNormal.Push(newAction, limitQueue:true);
+            instance.ClearReverse();
+        }
+
+        public static void Executed(List<IAction> newActionGroup)
+        {
+            // TODO: Add support for a group of actions simultaneously
+            //instance.queueStackNormal.Push(newAction);
+            instance.ClearReverse();
         }
 
         public static void Undo()
         {
-            var UndoAction = queueStackNormal.Pop();
+            var UndoAction = instance.queueStackNormal.Pop();
             if (UndoAction != null)
             {
                 UndoAction.Undo();
-                queueStackReverse.Push(UndoAction);
+                instance.queueStackReverse.Push(UndoAction);
+                instance.TriggerEvent();
             }
         }
 
         public static void Redo()
         {
-            var RedoAction = queueStackReverse.Pop();
+            var RedoAction = instance.queueStackReverse.Pop();
             if (RedoAction != null)
             {
                 RedoAction.Redo();
-                queueStackNormal.Push(RedoAction);
+                instance.queueStackNormal.Push(RedoAction);
+                instance.TriggerEvent();
             }
         }
 
-        public static void ClearNormal()
+        private void TriggerEvent()
         {
-            queueStackNormal.Clear();
+            if (HistoryChanged != null)
+            {
+                var HistoryEventArgs = new HistoryStatus() { HasUndoAvailable = HasUndoAvailable, HasRedoAvailable = HasRedoAvailable };
+                HistoryChanged(this, HistoryEventArgs);
+            }
         }
 
-        public static void ClearReverse()
+        private void ClearReverse()
         {
             if (queueStackNormal.HasItems)
             {
                 queueStackReverse.Clear();
+                TriggerEvent();
             }
         }
+        #endregion
     }
 }

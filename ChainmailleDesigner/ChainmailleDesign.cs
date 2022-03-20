@@ -4132,9 +4132,11 @@ namespace ChainmailleDesigner
       Point? cPoint = ElementToPointInColorImage(elementId, referencedElement);
       if (cPoint.HasValue)
       {
+        var OldColor = colorImage.BitmapImage.GetPixel(cPoint.Value.X, cPoint.Value.Y);
+        if (color.ToArgb() == OldColor.ToArgb()) { return; } // If the point hasn't changed, exit
+
         if (!calledFromCommandHistory)
         {
-          var OldColor = colorImage.BitmapImage.GetPixel(cPoint.Value.X, cPoint.Value.Y);
           var SaveAction = new ActionRingColorChange(this, elementId, color, referencedElement, OldColor);
           CommandHistory.Executed(SaveAction);
         }

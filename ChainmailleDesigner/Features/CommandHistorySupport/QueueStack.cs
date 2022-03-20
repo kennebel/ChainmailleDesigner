@@ -19,9 +19,14 @@ namespace ChainmailleDesigner.Features.CommandHistorySupport
         #endregion
 
         #region Public Methods
-        public void Push(T item)
+        public void Push(T item, bool limitQueue = false)
         {
             dataCollection.AddFirst(item);
+
+            if (limitQueue)
+            {
+                // TODO: Put a limit on the undo stack to keep it from consuming too much memory
+            }
         }
 
         public T Pop()
