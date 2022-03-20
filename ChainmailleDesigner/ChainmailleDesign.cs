@@ -3665,10 +3665,16 @@ namespace ChainmailleDesigner
     }
 
     public void ReplaceColorsInDesign(
-      Dictionary<Color, Color> colorReplacements, string ringFilter)
+      Dictionary<Color, Color> colorReplacements, string ringFilter, bool calledFromCommandHistory = false)
     {
       if (colorReplacements.Count > 0 && colorImage != null)
       {
+        if (!calledFromCommandHistory)
+        {
+          var SaveAction = new ActionReplaceColor(this, colorReplacements, ringFilter);
+          CommandHistory.Executed(SaveAction);
+        }
+
         // Build the color map.
         ImageAttributes imageAttributes = new ImageAttributes();
         ColorMap[] colorMap = new ColorMap[colorReplacements.Count];
