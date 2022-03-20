@@ -64,8 +64,8 @@ namespace ChainmailleDesigner
             this.designerTextBox = new System.Windows.Forms.TextBox();
             this.designerLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.historyLimitLabel = new System.Windows.Forms.Label();
             this.historyLimitUpDown = new System.Windows.Forms.NumericUpDown();
+            this.historyLimitLabel = new System.Windows.Forms.Label();
             this.directoryGroupBox.SuspendLayout();
             this.designGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -77,7 +77,7 @@ namespace ChainmailleDesigner
             this.cancelbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelbutton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelbutton.Location = new System.Drawing.Point(610, 44);
-            this.cancelbutton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cancelbutton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelbutton.Name = "cancelbutton";
             this.cancelbutton.Size = new System.Drawing.Size(75, 29);
             this.cancelbutton.TabIndex = 14;
@@ -89,7 +89,7 @@ namespace ChainmailleDesigner
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.okButton.Location = new System.Drawing.Point(610, 8);
-            this.okButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.okButton.Margin = new System.Windows.Forms.Padding(2);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 29);
             this.okButton.TabIndex = 13;
@@ -266,21 +266,11 @@ namespace ChainmailleDesigner
             this.groupBox1.Text = "Undo History";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // historyLimitLabel
-            // 
-            this.historyLimitLabel.AutoSize = true;
-            this.historyLimitLabel.Location = new System.Drawing.Point(22, 24);
-            this.historyLimitLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.historyLimitLabel.Name = "historyLimitLabel";
-            this.historyLimitLabel.Size = new System.Drawing.Size(66, 13);
-            this.historyLimitLabel.TabIndex = 0;
-            this.historyLimitLabel.Text = "History Limit:";
-            // 
             // historyLimitUpDown
             // 
             this.historyLimitUpDown.Location = new System.Drawing.Point(132, 20);
             this.historyLimitUpDown.Maximum = new decimal(new int[] {
-            1000,
+            5000,
             0,
             0,
             0});
@@ -293,6 +283,16 @@ namespace ChainmailleDesigner
             0,
             0,
             0});
+            // 
+            // historyLimitLabel
+            // 
+            this.historyLimitLabel.AutoSize = true;
+            this.historyLimitLabel.Location = new System.Drawing.Point(22, 24);
+            this.historyLimitLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.historyLimitLabel.Name = "historyLimitLabel";
+            this.historyLimitLabel.Size = new System.Drawing.Size(66, 13);
+            this.historyLimitLabel.TabIndex = 0;
+            this.historyLimitLabel.Text = "History Limit:";
             // 
             // ConfigurationForm
             // 

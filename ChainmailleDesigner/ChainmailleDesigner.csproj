@@ -154,7 +154,7 @@
     <Compile Include="Features\CommandHistory.cs" />
     <Compile Include="Features\CommandHistorySupport\ActionRingColorChange.cs" />
     <Compile Include="Features\CommandHistorySupport\IAction.cs" />
-    <Compile Include="Features\CommandHistorySupport\QueueStack.cs" />
+    <Compile Include="Features\CommandHistorySupport\HistoryStack.cs" />
     <Compile Include="FileUtils.cs" />
     <Compile Include="IniFile.cs" />
     <Compile Include="IShapeProgressIndicator.cs" />

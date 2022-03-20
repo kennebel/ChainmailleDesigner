@@ -4,28 +4,35 @@ using System.Linq;
 
 namespace ChainmailleDesigner.Features.CommandHistorySupport
 {
-    public class QueueStack<T>
+    public class HistoryStack<T>
     {
-        #region Fields
         private LinkedList<T> dataCollection { get; set; }
         public bool HasItems {  get {  return dataCollection.Count > 0; } }
-        #endregion
+        public bool EnableDisableMenuItems {  get { return dataCollection.Count <= 1; } }
+        private int HistoryLimit
+        {
+            get
+            {
+                return Properties.Settings.Default.HistoryLimit;
+            }
+        }
 
-        #region Construct / Destruct
-        public QueueStack()
+        public HistoryStack()
         {
             dataCollection = new LinkedList<T>();
         }
-        #endregion
 
-        #region Public Methods
         public void Push(T item, bool limitQueue = false)
         {
             dataCollection.AddFirst(item);
 
-            if (limitQueue)
+            if (limitQueue && dataCollection.Count > HistoryLimit)
             {
-                // TODO: Put a limit on the undo stack to keep it from consuming too much memory
+                do
+                {
+                    dataCollection.RemoveLast();
+                }
+                while (dataCollection.Count > HistoryLimit);
             }
         }
 
@@ -40,6 +47,5 @@ namespace ChainmailleDesigner.Features.CommandHistorySupport
         {
             dataCollection.Clear();
         }
-        #endregion
     }
 }
