@@ -146,20 +146,32 @@ namespace ChainmailleDesigner
       RotateOverlay(-quarterCircleInDegrees);
     }
 
-    private void RotateDesign(float degreesToRotate)
+    public void RotateDesign(float degreesToRotate, bool calledFromCommandHistory = false)
     {
       if (chainmailleDesign != null)
       {
+        if (!calledFromCommandHistory)
+        {
+          var SaveAction = new ChainmailleDesigner.Features.CommandHistorySupport.ActionRotateDesign(this, degreesToRotate);
+          ChainmailleDesigner.Features.CommandHistory.Executed(SaveAction);
+        }
+
         chainmailleDesign.RotateDesign(degreesToRotate);
         ShowRenderedImageAtZoom();
         RefreshScrollBars();
       }
     }
 
-    private void RotateOverlay(float degreesToRotate)
+    public void RotateOverlay(float degreesToRotate, bool calledFromCommandHistory = false)
     {
       if (chainmailleDesign != null)
       {
+        if (!calledFromCommandHistory)
+        {
+          var SaveAction = new ChainmailleDesigner.Features.CommandHistorySupport.ActionRotateOverlay(this, degreesToRotate);
+          ChainmailleDesigner.Features.CommandHistory.Executed(SaveAction);
+        }
+                
         chainmailleDesign.RotateOverlay(degreesToRotate);
         ShowRenderedImageAtZoom();
       }
