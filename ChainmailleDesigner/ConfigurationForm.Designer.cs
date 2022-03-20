@@ -274,6 +274,11 @@ namespace ChainmailleDesigner
             0,
             0,
             0});
+            this.historyLimitUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.historyLimitUpDown.Name = "historyLimitUpDown";
             this.historyLimitUpDown.Size = new System.Drawing.Size(120, 20);
             this.historyLimitUpDown.TabIndex = 1;
